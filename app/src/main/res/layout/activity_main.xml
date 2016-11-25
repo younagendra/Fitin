@@ -10,60 +10,228 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        cardview:cardBackgroundColor="#283593"
-        cardview:cardCornerRadius="6dp"
+        cardview:cardCornerRadius="10dp"
         cardview:cardElevation="8dp"
         cardview:cardUseCompatPadding="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cardviewbg"
+            android:id="@+id/imageView" />
 
         <LinearLayout
             android:id="@+id/reveal_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="#03A9F4"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/textView"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Reveal effect Sample"
-                android:textColor="#F3E5F5"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="52dp">
+
+                <!--Gender spinner section-->
+                <LinearLayout
+                    android:id="@+id/gender_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Gender: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/spinner_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:spinnerMode="dropdown" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Age:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FFFFFF" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/weight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Weight: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FFFFFF" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <EditText
+                            android:id="@+id/weight_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingRight="16dp"
+                            android:paddingTop="16dp"
+                            android:text="kg"
+                            android:textAllCaps="false"
+                            android:textStyle="italic" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!---Height-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/height"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Height: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FFFFFF" />
+
+                    <EditText
+                        android:id="@+id/height_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingTop="16dp"
+                        android:text="Workout Plan: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/routine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:spinnerMode="dialog" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="64dp"
+                    android:background="@drawable/ripple_effect"
+                    android:text="Result"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </LinearLayout>
 
         </LinearLayout>
 
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="#20FFFF" />-->
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/button_bmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="serif-monospace"
-            android:text="CardView Sample"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="italic" />
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="64dp"
+            android:background="@drawable/button_bmi_shape"
+            android:elevation="10dp"
+            android:text="BMI"
+            android:textColor="#FFFF" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+        <Button
+            android:id="@+id/button_bmr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="20dp"
-            android:src="@android:drawable/ic_dialog_email"
-            cardview:backgroundTint="#03A9F4"
-            cardview:elevation="8dp"
-            cardview:fabSize="normal" />
+            android:layout_gravity="top|center_horizontal"
+            android:layout_margin="64dp"
+            android:background="@drawable/button_bmr_shape"
+            android:elevation="10dp"
+            android:text="BMR"
+            android:textColor="#FFFF" />
+
     </android.support.v7.widget.CardView>
 
 

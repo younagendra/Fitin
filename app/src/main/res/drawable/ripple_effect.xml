@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><!-- A blue ripple drawn atop a drawable resource.-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#BDBDBD">
+    <item android:drawable="@drawable/result_button_shape" />
+</ripple>

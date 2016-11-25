@@ -1,24 +1,31 @@
 package com.example.c5234873.samplerevealeffect;
 
 import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton mFloatingButton;
+    Button mButtonBmi;
+    Button mButtonBmr;
     CardView cardView;
-    TextView mTextView2;
     View revealView;
-    boolean flag;
+    boolean mFlag;
+    ImageView mImage;
 
 
     @Override
@@ -28,18 +35,67 @@ public class MainActivity extends AppCompatActivity {
 
         cardView = (CardView) findViewById(R.id.card);
         revealView = findViewById(R.id.reveal_view);
-        mTextView2 = (TextView) findViewById(R.id.textView2);
 
-        mFloatingButton = (FloatingActionButton) findViewById(R.id.fab);
-        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+        mButtonBmi = (Button) findViewById(R.id.button_bmi);
+        mButtonBmr = (Button) findViewById(R.id.button_bmr);
+        mImage = (ImageView) findViewById(R.id.imageView);
+
+        mButtonBmr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                performRevealEffect();
+                mFlag = true;
+                prepareRevealEffect(getResources().getColor(R.color.color_bmi));
+            }
+        });
+        mButtonBmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFlag = false;
+                prepareRevealEffect(getResources().getColor(R.color.color_bmr));
             }
         });
     }
 
-    private void performRevealEffect() {
+
+    private void prepareRevealEffect(int color) {
+
+        Animator buttonBmiAnim = AnimatorInflater.loadAnimator(this, R.animator.bmi_animation);
+        buttonBmiAnim.setTarget(mButtonBmi);
+
+        Animator buttonBmrAnim = AnimatorInflater.loadAnimator(this, R.animator.bmi_animation);
+        buttonBmrAnim.setTarget(mButtonBmr);
+
+        revealView.setBackgroundColor(color);
+
+        if (mButtonBmi.isPressed()) {
+            buttonBmrAnim.setStartDelay(200);
+        } else {
+            buttonBmiAnim.setStartDelay(200);
+        }
+        buttonBmrAnim.start();
+        buttonBmiAnim.start();
+
+
+        buttonBmiAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                startRevealEffect();
+                mButtonBmi.setVisibility(View.GONE);
+            }
+        });
+
+        buttonBmrAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                startRevealEffect();
+                mButtonBmr.setVisibility(View.GONE);
+            }
+        });
+        //
+    }
+
+    private void startRevealEffect() {
         //get card height and width
         int cx = cardView.getHeight();
         int cy = cardView.getWidth();
@@ -49,13 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
         //get instance of animator
         Animator anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0, hypotenuse);
-        //visible the required view
         revealView.setVisibility(View.VISIBLE);
+
         //start the animation
-        anim.setDuration(500);
+        anim.setDuration(1000);
         anim.start();
-        //
-        mTextView2.setVisibility(View.GONE);
     }
 
 
