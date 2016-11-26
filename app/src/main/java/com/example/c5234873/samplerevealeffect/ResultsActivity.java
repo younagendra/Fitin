@@ -1,25 +1,11 @@
 package com.example.c5234873.samplerevealeffect;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.util.Pools;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Config;
 import android.view.View;
-import android.view.animation.AnticipateInterpolator;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
-import android.widget.ViewSwitcher;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.DecoDrawEffect;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
@@ -27,19 +13,10 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Random;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class ResultsActivity extends AppCompatActivity {
     TickerView mTickerView;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +27,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        //this method takes of displaying the decoview animtions
+        //this method takes care of displaying the decoview animations
         performDecoAnimations();
 
         //update text along with seriesitem2(inside this method this
