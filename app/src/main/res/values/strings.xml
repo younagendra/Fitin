@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SampleRevealEffect</string>
+    <string name="title_activity_results">ResultsActivity</string>
+
+    <string name="gender">Gender:</string>
+    <string name="age">Age:</string>
+    <string name="weight">Weight:</string>
+    <string name="units">kg</string>
+    <string name="height">Height:</string>
+    <string name="workout_plan">Workout Plan:</string>
+    <string name="Result">Result</string>
+    <string name="bmi">BMI</string>
+    <string name="bmr">BMR</string>
+
 </resources>

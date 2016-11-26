@@ -6,12 +6,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     View revealView;
     boolean mFlag;
     ImageView mImage;
+    Button mResultButton;
 
 
     @Override
@@ -39,19 +42,28 @@ public class MainActivity extends AppCompatActivity {
         mButtonBmi = (Button) findViewById(R.id.button_bmi);
         mButtonBmr = (Button) findViewById(R.id.button_bmr);
         mImage = (ImageView) findViewById(R.id.imageView);
+        mResultButton = (Button) findViewById(R.id.resultbutton);
 
         mButtonBmr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mFlag = true;
-                prepareRevealEffect(getResources().getColor(R.color.color_bmi));
+                prepareRevealEffect(getResources().getColor(R.color.color_bmr));
             }
         });
         mButtonBmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mFlag = false;
-                prepareRevealEffect(getResources().getColor(R.color.color_bmr));
+                prepareRevealEffect(getResources().getColor(R.color.color_bmi));
+            }
+        });
+
+        mResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultsActivity = new Intent(getApplicationContext(), ResultsActivity.class);
+                startActivity(resultsActivity);
             }
         });
     }
@@ -68,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
         revealView.setBackgroundColor(color);
 
         if (mButtonBmi.isPressed()) {
-            buttonBmrAnim.setStartDelay(200);
+            buttonBmrAnim.setStartDelay(300);
         } else {
-            buttonBmiAnim.setStartDelay(200);
+            buttonBmiAnim.setStartDelay(300);
         }
         buttonBmrAnim.start();
         buttonBmiAnim.start();
@@ -80,16 +92,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                startRevealEffect();
                 mButtonBmi.setVisibility(View.GONE);
+                startRevealEffect();
             }
         });
 
         buttonBmrAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                startRevealEffect();
                 mButtonBmr.setVisibility(View.GONE);
+                startRevealEffect();
             }
         });
         //
@@ -108,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         revealView.setVisibility(View.VISIBLE);
 
         //start the animation
-        anim.setDuration(1000);
+        anim.setDuration(900);
         anim.start();
     }
 
