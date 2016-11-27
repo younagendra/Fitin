@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Path;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+
+        startUnRevealEffect();
+//        super.onBackPressed();
+    }
 
     private void prepareRevealEffect(int color) {
 
@@ -87,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         buttonBmrAnim.start();
         buttonBmiAnim.start();
 
-
+        Path path = new Path();
         buttonBmiAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                mButtonBmi.setVisibility(View.GONE);
+//                mButtonBmi.setVisibility(View.GONE);
                 startRevealEffect();
             }
         });
@@ -100,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         buttonBmrAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mButtonBmr.setVisibility(View.GONE);
+//                mButtonBmr.setVisibility(View.GONE);
                 startRevealEffect();
             }
         });
@@ -122,6 +129,32 @@ public class MainActivity extends AppCompatActivity {
         //start the animation
         anim.setDuration(900);
         anim.start();
+    }
+    private void startUnRevealEffect() {
+        //get card height and width
+        int cx = cardView.getHeight();
+        int cy = cardView.getWidth();
+
+        //get hypotenuse for the diagonal reveal effect
+        int hypotenuse = (int) Math.hypot(cardView.getWidth(), cardView.getHeight());
+
+        //get instance of animator
+        Animator anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, hypotenuse, 0);
+        revealView.setVisibility(View.VISIBLE);
+
+        //start the animation
+        anim.setDuration(900);
+        anim.start();
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                revealView.setVisibility(View.INVISIBLE);
+
+                mButtonBmi.setVisibility(View.VISIBLE);
+                mButtonBmr.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 

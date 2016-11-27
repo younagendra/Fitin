@@ -72,7 +72,7 @@ public class ResultsActivity extends AppCompatActivity {
         mTickerView.setCharacterList(TickerUtils.getDefaultListForUSCurrency());
 
         //set the animation duration to two seconds
-        mTickerView.setAnimationDuration(2000);
+        mTickerView.setAnimationDuration(1500);
 
 
         decoView.executeReset();
@@ -88,7 +88,7 @@ public class ResultsActivity extends AppCompatActivity {
                 .build());
 
         //asking deco view to animate main items
-        startCircleItemAnimation(decoView, 50f, seriesIndex, 2000, 3250);
+        startCircleItemAnimation(decoView, 50f, seriesIndex, 1500, 3250);
 
     }
 
@@ -125,10 +125,7 @@ public class ResultsActivity extends AppCompatActivity {
                         //**Random values before displaying the required value**//
                         final int result = r.nextInt(high - low) + low;
                         mTickerView.setText(String.valueOf(result));
-                        mTickerView.setText(String.valueOf(result + 10));
-                        mTickerView.setText(String.valueOf(result + 20));
                         //****************************************************//
-
                         //Update the required value in ticker motion
                         mTickerView.setText(String.valueOf(2964));
 
