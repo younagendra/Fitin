@@ -12,4 +12,19 @@
     <string name="bmi">BMI</string>
     <string name="bmr">BMR</string>
 
+    <!--Spinner values-->
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <!--Workout Plan Values-->
+    <string-array name="workout_plan">
+        <item>Little</item>
+        <item>Moderate(4-5 Days/Week)</item>
+        <item>Heavy(6-7 Days/Week</item>
+        <item>Very heavy</item>
+
+    </string-array>
+
 </resources>

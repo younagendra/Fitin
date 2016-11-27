@@ -3,4 +3,6 @@
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="300"
     android:propertyName="TranslationX"
+    android:repeatCount="1"
+    android:repeatMode="reverse"
     android:valueTo="800" />

@@ -6,6 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.DecoDrawEffect;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
@@ -27,6 +30,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+
         //this method takes care of displaying the decoview animations
         performDecoAnimations();
 
@@ -44,6 +48,8 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void performDecoAnimations() {
         //deco view handling
@@ -102,7 +108,7 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private SeriesItem createSeriesItem(int itemColor, float v, boolean visiblity) {
-        return  new SeriesItem.Builder(itemColor)
+        return new SeriesItem.Builder(itemColor)
                 .setRange(0, v, 0)
                 .setInitialVisibility(visiblity)
                 .build();
