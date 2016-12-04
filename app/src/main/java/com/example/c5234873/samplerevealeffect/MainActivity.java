@@ -14,7 +14,9 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
@@ -31,7 +33,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import static android.R.attr.breadCrumbShortTitle;
+import static android.R.attr.numberPickerStyle;
 import static android.R.attr.visible;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,17 +44,23 @@ public class MainActivity extends AppCompatActivity {
     Button mButtonBmi;
     Button mButtonBmr;
     CardView cardView;
-    View revealView;
+    View revealView, mAgeView, mGenderView, mWorkoutView;
     boolean mFlag;
     ImageView mImage;
     Button mResultButton;
     Spinner mGenderSpinner, mWorkoutSpinner;
-    int selectedPosition;
+    ArrayAdapter<CharSequence> mSpinnerAdapter;
+    int mGenderValue;
+    int mWorkoutValue;
+    EditText mAgeEditText;
+    EditText mHeightEditText;
+    EditText mWeightEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         cardView = (CardView) findViewById(R.id.card);
         revealView = findViewById(R.id.reveal_view);
@@ -58,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
         mButtonBmr = (Button) findViewById(R.id.button_bmr);
         mImage = (ImageView) findViewById(R.id.imageView);
         mResultButton = (Button) findViewById(R.id.resultbutton);
-        EditText ageEditText = (EditText) findViewById(R.id.ageEditText);
+        mAgeEditText = (EditText) findViewById(R.id.ageEditText);
+        mWeightEditText = (EditText) findViewById(R.id.weight_value);
+        mHeightEditText = (EditText) findViewById(R.id.height_value);
+
+        mAgeView = findViewById(R.id.age_layout);
+        mWorkoutView = findViewById(R.id.workout_view);
+        mGenderView = findViewById(R.id.gender_view);
 
         mButtonBmr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,28 +92,110 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mResultButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent resultsActivity = new Intent(getApplicationContext(), ResultsActivity.class);
-                startActivity(resultsActivity);
-            }
-        });
         mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
         mWorkoutSpinner = (Spinner) findViewById(R.id.routine);
 
-        EditText weightEditText = (EditText) findViewById(R.id.weight_value);
-        EditText heightEditText = (EditText) findViewById(R.id.height_value);
 
         populateSpinnerValues(mGenderSpinner, R.array.gender_array);
         populateSpinnerValues(mWorkoutSpinner, R.array.workout_plan);
 
-        setEditTextMaxLength(ageEditText, 2);
-        setEditTextMaxLength(weightEditText, 3);
-        setEditTextMaxLength(heightEditText, 3);
+        setEditTextMaxLength(mAgeEditText, 2);
+        setEditTextMaxLength(mWeightEditText, 3);
+        setEditTextMaxLength(mHeightEditText, 3);
 
+        mResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double bmrValue;
+                int bmiValue;
+                int caloriesRequired = 0;
+                Intent resultsActivity = new Intent(getApplicationContext(), ResultsActivity.class);
+                if (mFlag) {
+                    bmrValue = calculateBMR();
+                    if (bmrValue != 0) {
+                        caloriesRequired = (int) calculateCaloriesNeeded(bmrValue);
+                        resultsActivity.putExtra("calories", caloriesRequired + "");
+                        startActivity(resultsActivity);
+                    }
+                } else {
+                    bmiValue = (int) calculateBMI();
+                    if (bmiValue != 0) {
+                        resultsActivity.putExtra("bmi_value", bmiValue + "");
+                        startActivity(resultsActivity);
+                    }
+                }
+            }
+        });
 
+    }
 
+    private double calculateBMI() {
+
+        String height;
+        String weight;
+
+        weight = mWeightEditText.getText().toString();
+        height = mHeightEditText.getText().toString();
+
+        if (weight.equals("") || height.equals("")) {
+            Toast.makeText(this, "Weight and Height Cannot be Blank", Toast.LENGTH_SHORT).show();
+            return 0;
+        }
+
+        double heightInM = Integer.parseInt(height);
+        heightInM = heightInM/100;
+        int weightInKg = Integer.parseInt(weight);
+        double bmiScore = weightInKg / (heightInM * heightInM);
+        return bmiScore;
+
+    }
+
+    private double calculateCaloriesNeeded(double bmrValue) {
+        double calories = 0;
+        switch (mWorkoutValue) {
+            case 0:
+                calories = bmrValue * 1.2;
+                break;
+            case 1:
+                calories = bmrValue * 1.375;
+                break;
+            case 2:
+                calories = bmrValue * 1.55;
+                break;
+            case 3:
+                calories = bmrValue * 1.725;
+                break;
+            case 4:
+                calories = bmrValue * 1.9;
+                break;
+        }
+        return calories;
+
+    }
+
+    private double calculateBMR() {
+        double bmrValue;
+        String weight, height, age;
+        weight = mWeightEditText.getText().toString();
+        height = mHeightEditText.getText().toString();
+        age = mAgeEditText.getText().toString();
+        if (weight.equals("") || height.equals("") || age.equals("")) {
+            Toast.makeText(this, "All Fields Required", Toast.LENGTH_SHORT).show();
+            return 0;
+        }
+
+        if (mGenderValue == 0) {
+            bmrValue =
+                    66.4730 + (13.7516 * Integer.parseInt(weight))
+                            + (5.003 * Integer.parseInt(height)
+                            - (6.7550 * Integer.parseInt(age)));
+        } else {
+            bmrValue =
+                    655.0955 + (9.5634 * Integer.parseInt(weight))
+                            + (1.8496 * Integer.parseInt(height))
+                            - (4.6756 * Integer.parseInt(age));
+        }
+        return bmrValue;
     }
 
     private void setEditTextMaxLength(EditText ageText, int length) {
@@ -106,16 +205,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void populateSpinnerValues(Spinner spinner, int itemsLayoutId) {
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
+    private void populateSpinnerValues(final Spinner spinner, int itemsLayoutId) {
+        mSpinnerAdapter = ArrayAdapter
                 .createFromResource(this, itemsLayoutId, R.layout.support_simple_spinner_dropdown_item);
 
-        spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        mSpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(mSpinnerAdapter);
+
+        //item selected listener for the spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                selectedPosition = pos;
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
+                String selection = (String) parent.getItemAtPosition(pos);
+                if (!TextUtils.isEmpty(selection)) {
+                    if (spinner == mGenderSpinner) {
+                        switch (pos) {
+                            case 0://Male selected
+                                mGenderValue = Constants.MALE;
+                                break;
+                            case 1:
+                                mGenderValue = Constants.FEMALE;
+                        }
+                    } else {
+                        switch (pos) {
+                            case 0:
+                                mWorkoutValue = Constants.NO_EXERCISE;
+                                break;
+                            case 1:
+                                mWorkoutValue = Constants.LITTLE;
+                                break;
+                            case 2:
+                                mWorkoutValue = Constants.MODERATE;
+                                break;
+                            case 3:
+                                mWorkoutValue = Constants.HEAVY;
+                                break;
+                            case 4:
+                                mWorkoutValue = Constants.VERY_HEAVY;
+                                break;
+                        }
+                    }
+                }
+
             }
 
             @Override
@@ -123,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -141,8 +273,6 @@ public class MainActivity extends AppCompatActivity {
         mButtonBmr.setVisibility(View.GONE);
         revealView.setBackgroundColor(color);
         startRevealEffect();
-        startRevealEffect();
-        //
     }
 
     private void startRevealEffect() {
@@ -156,10 +286,20 @@ public class MainActivity extends AppCompatActivity {
         //get instance of animator
         Animator anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0, hypotenuse);
         revealView.setVisibility(View.VISIBLE);
-
+        if (!mFlag) {
+            setBmiVisibility(View.GONE);
+        } else {
+            setBmiVisibility(View.VISIBLE);
+        }
         //start the animation
         anim.setDuration(900);
         anim.start();
+    }
+
+    private void setBmiVisibility(int visibility) {
+        mGenderView.setVisibility(visibility);
+        mWorkoutView.setVisibility(visibility);
+        mAgeView.setVisibility(visibility);
     }
 
     private void startUnRevealEffect() {

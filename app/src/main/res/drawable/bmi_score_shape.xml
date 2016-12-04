@@ -3,8 +3,8 @@
         <shape android:shape="oval">
             <size android:width="125dp"
                 android:height="125dp"/>
-            <solid android:color="@color/color_bmi"/>
-            <stroke android:color="#10000000" android:width="4dp" />
+            <solid android:color="#16a085"/>
+            <!--<stroke android:color="#263238" android:width="4dp" />-->
         </shape>
     </item>
 </selector>

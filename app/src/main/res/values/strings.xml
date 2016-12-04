@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">SampleRevealEffect</string>
-    <string name="title_activity_results">ResultsActivity</string>
+    <string name="app_name">FitIn</string>
+    <string name="title_activity_results">Results</string>
 
     <string name="gender">Gender:</string>
     <string name="age">Age:</string>
     <string name="weight">Weight:</string>
     <string name="units">kg</string>
+    <string name="hunits">cm</string>
     <string name="height">Height:</string>
     <string name="workout_plan">Workout Plan:</string>
     <string name="Result">Result</string>
@@ -18,13 +19,43 @@
         <item>Female</item>
     </string-array>
 
+    <!--Gender values-->
+    <string name="male">Male</string>
+    <string name="female">Female </string>
+    <string name="bmi_score">Your BMI Score Is</string>
+
     <!--Workout Plan Values-->
     <string-array name="workout_plan">
+        <item>I do not Exercise</item>
         <item>Little</item>
         <item>Moderate(4-5 Days/Week)</item>
         <item>Heavy(6-7 Days/Week</item>
         <item>Very heavy</item>
 
     </string-array>
+
+    <!--BMI text-->
+    
+    <string name="bmi_score_le23">
+        Your BMI is in the ideal range. But that does not mean that you become complacent!
+        Just keep doing what you have been. Go for a balanced diet, exercise regularly and enjoy life!
+    </string>
+    
+    <string name="bmi_score_ge23">
+        Gradual weight loss is recommended to maintain a healthy body weight.
+        Even a small weight loss (just 10 percent of your current weight) will help
+        to lower your risk of developing diseases associated with being overweight.
+        So, why wait to maintain your weight? Manage a healthy body weight through exercise and eating right.
+    </string>
+
+    <string name="bmi_score_le19">
+        Try to eat more and eat the right kinds of nutritious foods as you are underweight.
+    It may also be useful to visit your doctor for a regular health check-up.
+    So, do not wait to maintain a healthy body weight.
+    The BMI normal range is not applicable to pregnant and breast feeding mothers.
+    </string>
+    <string name="you_need">You Need</string>
+    <string name="k_cal_day">K.Cal/Day "\n" To Maintain Ideal Weight</string>
+
 
 </resources>
