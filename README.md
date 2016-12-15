@@ -1,6 +1,9 @@
-# RevealEffectSample
+# Fitin
 
-This project demonstrates the use of DecoView, Reveal Effect, and TickerView.
+This application calculates your BMI and BMR and also demonstrates the
+use of following libraries.
+
+DecoView, TickerView, and custom animation Reveal effect provided in Android SDK.
 
 You can watch the demo here.
 
