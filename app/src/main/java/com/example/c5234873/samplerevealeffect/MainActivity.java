@@ -1,43 +1,23 @@
 package com.example.c5234873.samplerevealeffect;
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Path;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.TextUtils;
-import android.transition.Fade;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.R.attr.breadCrumbShortTitle;
-import static android.R.attr.numberPickerStyle;
-import static android.R.attr.visible;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -108,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 double bmrValue;
                 int bmiValue;
-                int caloriesRequired = 0;
+                int caloriesRequired ;
                 Intent resultsActivity = new Intent(getApplicationContext(), ResultsActivity.class);
                 if (mFlag) {
                     bmrValue = calculateBMR();

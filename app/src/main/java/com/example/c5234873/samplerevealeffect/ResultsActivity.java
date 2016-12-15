@@ -1,8 +1,6 @@
 package com.example.c5234873.samplerevealeffect;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,8 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hookedonplay.decoviewlib.DecoView;
@@ -22,7 +18,6 @@ import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Random;
 
 public class ResultsActivity extends AppCompatActivity {
