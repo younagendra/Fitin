@@ -1,6 +1,6 @@
 # RevealEffectSample
 
-This project demonstrates the use DecoView, Reveal Effect, and TickerView.
+This project demonstrates the use of DecoView, Reveal Effect, and TickerView.
 
 You can watch the demo here.
 
